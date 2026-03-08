@@ -10,7 +10,7 @@
 	"name": "Slider Mute",
 	"version": "v1.0.0",
 	"developer": "konnthedon",
-	"description": "",
+	"description": "Adds a mute button next to sliders",
 	"dependencies": {
 		"geode.node-ids": ">=v1.20.0"
 	},
