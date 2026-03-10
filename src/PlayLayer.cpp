@@ -3,6 +3,8 @@
 
 using namespace geode::prelude;
 
+// hooking into PlayLayer so auto mute works when you enter the level and not when you pause
+
 class $modify(SliderMutePlayLayer, PlayLayer) {
 public:
     bool init(GJGameLevel* level, bool useReplay, bool dontCreateObjects) {
@@ -10,10 +12,10 @@ public:
         
 
         if (Mod::get()->getSettingValue<bool>("auto-mute-music")) {
-            this->turnOffSound(true, false);
+            this->turnOffSound( true, false );
         }
         if (Mod::get()->getSettingValue<bool>("auto-mute-sfx")) {
-            this->turnOffSound(false, true);
+            this->turnOffSound( false, true );
         }
 
         return true;

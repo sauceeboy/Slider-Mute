@@ -52,7 +52,7 @@ public:
 				menu_selector(SliderMuteLayer::onMusicToggle)
 			);
 			// position them relitive to the slider
-			musicMuteToggle->setPosition({musicSlider->getPositionX() - 110.f, musicSlider->getPositionY()});
+			musicMuteToggle->setPosition({ musicSlider->getPositionX() - 110.f, musicSlider->getPositionY() });
 			musicMuteToggle->setID("mute-music-toggle"_spr);
 			musicMuteToggle->toggle(gm->m_bgVolume == 0.0f);
 
@@ -69,7 +69,7 @@ public:
 				menu_selector(SliderMuteLayer::onSfxToggle)
 			);
 			// position them relitive to the slider
-			sfxMuteToggle->setPosition({sfxSlider->getPositionX() + 110.f, sfxSlider->getPositionY()});
+			sfxMuteToggle->setPosition({ sfxSlider->getPositionX() + 110.f, sfxSlider->getPositionY() });
 			sfxMuteToggle->setID("mute-sfx-toggle"_spr);
 			sfxMuteToggle->toggle(gm->m_sfxVolume == 0.0f);
 
@@ -89,6 +89,7 @@ public:
 		auto fmod = FMODAudioEngine::sharedEngine();
 		bool isMuted = (fmod->getBackgroundMusicVolume() <= 0.01f);
 
+		// this is for updating the sprites based on what the value of the slider is
 		if (m_fields->m_musicToggle) {
 			if (m_fields->m_musicToggle->isToggled() != isMuted) {
 				m_fields->m_musicToggle->toggle(isMuted);
@@ -103,6 +104,7 @@ public:
 		auto fmod = FMODAudioEngine::sharedEngine();
 		bool isMuted = (fmod->getEffectsVolume() <= 0.01f);
 
+		// this is for upading the sprites based on what the value of the slider is
 		if (m_fields->m_sfxToggler) {
 			if (m_fields->m_sfxToggler->isToggled() != isMuted) {
 				m_fields->m_sfxToggler->toggle(isMuted);
@@ -126,7 +128,7 @@ public:
 		}
 		else {
 			targetVolume = Mod::get()->getSavedValue<float>("saved-music-volume", 1.0f);
-			if (targetVolume == 0.0f) targetVolume = 0.5f; // in case the volume is really low
+			if (targetVolume == 0.0f) targetVolume = 0.5f; // prevents a bug
 		}
 
 		gm->m_bgVolume = targetVolume;
@@ -156,8 +158,7 @@ public:
 		}
 		else {
 			targetVolume = Mod::get()->getSavedValue<float>("saved-sfx-volume");
-
-			if (targetVolume == 0.0f) targetVolume = 0.5f;
+			if (targetVolume == 0.0f) targetVolume = 0.5f; // prevents a bug
 		}
 
 		gm->m_sfxVolume = targetVolume;
